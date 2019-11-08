@@ -11,8 +11,9 @@ class Valve_Binary:
             inner = []
             while True:
                 qty = next(iter_conditions)
+                inequality_sign = next(iter_conditions)
                 val = next(iter_conditions)
-                stg = '{} __LAYER__ {} > {}'.format(kw.on_ctrllump(), qty, val)
+                stg = '{} __LAYER__ {} {} {}'.format(kw.on_ctrllump(), qty, inequality_sign, val)
                 inner.append(stg)
                 try:
                     conditional = next(iter_conditions)
@@ -29,8 +30,9 @@ class Valve_Binary:
             iter_conditions = iter(conditions)
             inner = 'Trigger\n'
             while True:
-                inner += '  with {} at {}\n'.format(
+                inner += '  with {} {} {}\n'.format(
                           next(iter_conditions)
+                        , next(iter_conditions)
                         , next(iter_conditions)
                         )
                 try:
