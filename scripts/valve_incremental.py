@@ -22,7 +22,7 @@ class Valve_Incremental:
             conditionals = self.conditionals[::-1]
             for key in operational_conditions:
                 interval = operational_conditions[key].pop()
-                stg = '{{{} __LAYER__ {} > {} AND {} __LAYER__ {} < {}}}'.format(kw.on_ctrllump(), key,
+                stg = '{} __LAYER__ {} > {} AND1 {} __LAYER__ {} < {}'.format(kw.on_ctrllump(), key,
                         interval[0], kw.on_ctrllump(), key, interval[1])
                 inner.append(stg)
                 try:
