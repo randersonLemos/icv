@@ -10,20 +10,19 @@ class Valve_Incremental:
     def operational_rule(self):
         operational_conditions = {}
         for operational in self.operational_conditions:
-            lst = []
-            lst += list(zip(operational[1:-1],operational[2:]))
+            lst = list(operational[1:])
             operational_conditions[operational[0]] = lst[::-1]
 
         outer = []
         actions = self.actions[::-1]
-        while self._has_element(operational_conditions):
+        while self._len_hold_lsts(operational_conditions):
+            print(self._len_hold_lsts(operational_conditions))
             inner = []
             stg = ''
             conditionals = self.conditionals[::-1]
             for key in operational_conditions:
-                interval = operational_conditions[key].pop()
-                stg = '{} __LAYER__ {} > {} AND1 {} __LAYER__ {} < {}'.format(kw.on_ctrllump(), key,
-                        interval[0], kw.on_ctrllump(), key, interval[1])
+                val = operational_conditions[key].pop()
+                stg = '{} __LAYER__ {} > {}'.format(kw.on_ctrllump(), key, val)
                 inner.append(stg)
                 try:
                     inner.append(conditionals.pop())
@@ -32,12 +31,8 @@ class Valve_Incremental:
                     outer.append(tuple(inner))
         return outer
 
-    def _has_element(self, dic):
-        if list(dic.values())[0]:
-            return True
-        else:
-            return False
-
+    def _len_hold_lsts(self, dic):
+        return len(list(dic.values())[0])
 
     def repr(self):
         outer = '###BINARY VALVE###\n'
