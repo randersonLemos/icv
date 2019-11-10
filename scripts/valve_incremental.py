@@ -16,7 +16,6 @@ class Valve_Incremental:
         outer = []
         actions = self.actions[::-1]
         while self._len_hold_lsts(operational_conditions):
-            print(self._len_hold_lsts(operational_conditions))
             inner = []
             stg = ''
             conditionals = self.conditionals[::-1]
