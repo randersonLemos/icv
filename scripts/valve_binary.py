@@ -1,4 +1,4 @@
-from dictionary.scripts.dictionary import Keywords as kw
+from dictionary.scripts.keywords import Keywords as kw
 
 class Valve_Binary:
     def __init__(self, *operational_conditions):
@@ -20,7 +20,7 @@ class Valve_Binary:
                     inner.append(conditional)
                 except StopIteration:
                     inner.append(0.0)
-                    outer.append(tuple(inner))
+                    outer.append(inner)
                     break
         return outer
 
