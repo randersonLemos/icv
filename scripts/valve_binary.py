@@ -10,16 +10,15 @@ class Valve_Binary:
             iter_conditions = iter(conditions)
             inner = []
             while True:
-                qty = next(iter_conditions)
-                inequality_sign = next(iter_conditions)
-                val = next(iter_conditions)
-                stg = '{} __LAYER__ {} {} {}'.format(kw.on_ctrllump(), qty, inequality_sign, val)
-                inner.append(stg)
                 try:
-                    conditional = next(iter_conditions)
-                    inner.append(conditional)
+                    qty = next(iter_conditions)
+                    ine = next(iter_conditions)
+                    val = next(iter_conditions)
+                    stg = '{} __LAYER__ {} {} {}'.format(kw.on_ctrllump(), qty, ine, val)
+                    xxx = next(iter_conditions) # conditional or action
+                    inner.append(stg)
+                    inner.append(xxx)
                 except StopIteration:
-                    inner.append(0.0)
                     outer.append(inner)
                     break
         return outer
